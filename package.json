@@ -1,0 +1,76 @@
+{
+  "name": "k6-trpc",
+  "version": "0.0.0",
+  "description": "k6 tRPC client",
+  "license": "MIT",
+  "main": "lib/cjs/index.js",
+  "types": "lib/types/index.d.ts",
+  "homepage": "https://github.com/dextertanyj/k6-trpc",
+  "author": {
+    "name": "Dexter Tan",
+    "email": "dev@dextertanyj.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dextertanyj/k6-trpc"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "*.md",
+    "lib",
+    "src"
+  ],
+  "keywords": [
+    "trpc",
+    "k6",
+    "load testing",
+    "stress testing"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "pre-commit": "lint-staged",
+    "prepack": "npm run build",
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "lint": "eslint --ext ts,js .",
+    "lint:fix": "eslint --fix --ext ts,js .",
+    "clean": "git clean -xdf node_modules lib"
+  },
+  "dependencies": {
+    "superjson": "^1.13.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@trpc/server": "^10.36.0",
+    "@types/k6": "^0.46.0",
+    "@types/node": "^20.5.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "husky": "^8.0.3",
+    "k6": "^0.0.0",
+    "lint-staged": "^14.0.0",
+    "prettier": "^3.0.2",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "@trpc/server": "^10.35.0"
+  },
+  "lint-staged": {
+    "**/*.(js|jsx|ts|tsx)": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  }
+}
