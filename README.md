@@ -35,6 +35,21 @@ check(response, {
 });
 ```
 
+**4. Bundle your test.**
+
+Refer to [k6-template-typescript](https://github.com/grafana/k6-template-typescript) on how to configure your bundler to emit `k6` compatible code.
+
+Use the following regex to ensure that `k6-trpc` is bundled together in the output and is not treated as an external dependency.
+
+```javascript
+{
+  // Other webpack configuration parameters.
+  externals: /^(k6|https?\:\/\/)(\/.*)?(?!-trpc)/,
+}
+```
+
+> Alternatively, refer to `webpack.config.js.example` for a sample webpack configuration.
+
 ## Configuration
 
 `createClient` accepts a `transformer` argument which allows you to use `SuperJSON` or any other tRPC-compliant transformer.
