@@ -48,7 +48,7 @@ const client = createClient<AppRouter>("http://localhost:3000/api/trpc/", superj
 Both `query` and `mutate` accept an optional argument to provide request parameters such as custom headers or cookies.
 
 ```typescript
-import { options as createOptions } from "k6-trpc";
+import { createOptions } from "k6-trpc";
 
 const response = client.healthcheck.query(
   createOptions({

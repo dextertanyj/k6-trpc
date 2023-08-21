@@ -14,9 +14,9 @@ require("https://jslib.k6.io/url/1.0.0/index.js");
 const NONE = Symbol();
 const OPTION = Symbol();
 
-export function options(options: Omit<Params, "responseCallback">) {
+export const createOptions = (options: Omit<Params, "responseCallback">) => {
   return { [OPTION]: "OPTION", ...options };
-}
+};
 
 type RouterKeys<T extends AnyRouter> = Exclude<keyof T, keyof AnyRouter>;
 
@@ -36,14 +36,14 @@ type Handler<R extends AnyRouter, K extends keyof R> = R[K] extends AnyRouter
       ? T extends "query"
         ? {
             query: I extends typeof NONE
-              ? (opts?: ReturnType<typeof options>) => ReturnType<typeof get>
-              : (input: I, opts?: ReturnType<typeof options>) => ReturnType<typeof get>;
+              ? (opts?: ReturnType<typeof createOptions>) => ReturnType<typeof get>
+              : (input: I, opts?: ReturnType<typeof createOptions>) => ReturnType<typeof get>;
           }
         : T extends "mutation"
         ? {
             mutate: I extends typeof NONE
-              ? (opts?: ReturnType<typeof options>) => ReturnType<typeof post>
-              : (input: I, opts?: ReturnType<typeof options>) => ReturnType<typeof post>;
+              ? (opts?: ReturnType<typeof createOptions>) => ReturnType<typeof post>
+              : (input: I, opts?: ReturnType<typeof createOptions>) => ReturnType<typeof post>;
           }
         : never
       : never
@@ -60,7 +60,7 @@ const isCombinedDataTransformer = (
   return Object.prototype.hasOwnProperty.call(transformer, "input");
 };
 
-const isOptions = (opts: unknown): opts is ReturnType<typeof options> => {
+const isOptions = (opts: unknown): opts is ReturnType<typeof createOptions> => {
   return (
     typeof opts === "object" && opts !== null && Object.prototype.hasOwnProperty.call(opts, OPTION)
   );
@@ -72,7 +72,7 @@ const createFunctionHandler = (
   transformer: CombinedDataTransformer | DataTransformer,
 ) => {
   return (...args: unknown[]) => {
-    let opts: ReturnType<typeof options> | undefined;
+    let opts: ReturnType<typeof createOptions> | undefined;
     let input: unknown = NONE;
 
     if (args.length === 2) {
