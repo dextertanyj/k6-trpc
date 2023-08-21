@@ -17,7 +17,8 @@
   "exports": {
     ".": {
       "import": "./lib/esm/index.js",
-      "require": "./lib/cjs/index.js"
+      "require": "./lib/cjs/index.js",
+      "types": "./lib/types/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -36,9 +37,10 @@
     "prepare": "husky install",
     "pre-commit": "lint-staged",
     "prepack": "npm run build",
-    "build": "npm run build:esm && npm run build:cjs",
+    "build": "npm run build:esm && npm run build:cjs && npm run build:types",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:types": "tsc -p tsconfig.types.json",
     "lint": "eslint --ext ts,js .",
     "lint:fix": "eslint --fix --ext ts,js .",
     "clean": "git clean -xdf node_modules lib"
