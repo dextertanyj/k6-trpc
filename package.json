@@ -43,9 +43,6 @@
     "lint:fix": "eslint --fix --ext ts,js .",
     "clean": "git clean -xdf node_modules lib"
   },
-  "dependencies": {
-    "superjson": "^1.13.1"
-  },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
