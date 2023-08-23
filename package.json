@@ -1,6 +1,6 @@
 {
   "name": "k6-trpc",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "k6 tRPC client",
   "license": "MIT",
   "main": "lib/cjs/index.js",
