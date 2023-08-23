@@ -43,7 +43,8 @@
     "build:types": "tsc -p tsconfig.types.json",
     "lint": "eslint --ext ts,js .",
     "lint:fix": "eslint --fix --ext ts,js .",
-    "clean": "git clean -xdf node_modules lib"
+    "clean": "git clean -xdf node_modules lib",
+    "version": "auto-changelog -p && git add CHANGELOG.md"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
@@ -53,6 +54,7 @@
     "@types/node": "^20.5.0",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.4.0",
+    "auto-changelog": "^2.4.0",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
